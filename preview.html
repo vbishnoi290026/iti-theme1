@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Govt. ITI Chhattargarh Bikaner</title>
+
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    />
+
+    <!-- Remix Icons -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.2.0/remixicon.min.css"
+    />
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+        }
+
+        html{
+            scroll-behavior:smooth;
+        }
+
+        body{
+            font-family:'Poppins',sans-serif;
+            background:#07111f;
+            color:#fff;
+            overflow-x:hidden;
+        }
+
+        :root{
+            --primary:#00b4ff;
+            --secondary:#7c3aed;
+            --dark:#07111f;
+            --card:#111c2d;
+            --light:#ffffff;
+            --text:#cbd5e1;
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar{
+            width:8px;
+        }
+
+        ::-webkit-scrollbar-thumb{
+            background:var(--primary);
+            border-radius:10px;
+        }
+
+        /* Navbar */
+        .navbar{
+            position:fixed;
+            top:0;
+            left:0;
+            width:100%;
+            z-index:999;
+            padding:18px 7%;
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            backdrop-filter:blur(12px);
+            background:rgba(7,17,31,0.7);
+            border-bottom:1px solid rgba(255,255,255,0.08);
+        }
+
+        .logo{
+            font-size:24px;
+            font-weight:700;
+            color:#fff;
+        }
+
+        .logo span{
+            color:var(--primary);
+        }
+
+        .nav-links{
+            display:flex;
+            gap:35px;
+        }
+
+        .nav-links a{
+            color:#fff;
+            text-decoration:none;
+            font-size:15px;
+            font-weight:500;
+            position:relative;
+            transition:0.3s;
+        }
+
+        .nav-links a::after{
+            content:'';
+            position:absolute;
+            left:0;
+            bottom:-8px;
+            width:0%;
+            height:2px;
+            background:var(--primary);
+            transition:0.3s;
+        }
+
+        .nav-links a:hover::after{
+            width:100%;
+        }
+
+        .nav-links a:hover{
+            color:var(--primary);
+        }
+
+        /* Hero */
+        .hero{
+            min-height:100vh;
+            display:flex;
+            align-items:center;
+            padding:130px 7% 80px;
+            position:relative;
+            overflow:hidden;
+        }
+
+        .hero::before{
+            content:'';
+            position:absolute;
+            width:500px;
+            height:500px;
+            background:rgba(0,180,255,0.15);
+            filter:blur(120px);
+            top:-120px;
+            left:-100px;
+            border-radius:50%;
+        }
+
+        .hero::after{
+            content:'';
+            position:absolute;
+            width:450px;
+            height:450px;
+            background:rgba(124,58,237,0.2);
+            filter:blur(120px);
+            bottom:-150px;
+            right:-100px;
+            border-radius:50%;
+        }
+
+        .hero-content{
+            position:relative;
+            z-index:2;
+            max-width:720px;
+        }
+
+        .hero-badge{
+            display:inline-flex;
+            align-items:center;
+            gap:10px;
+            padding:10px 18px;
+            background:rgba(255,255,255,0.08);
+            border:1px solid rgba(255,255,255,0.08);
+            border-radius:50px;
+            margin-bottom:25px;
+            color:#dbeafe;
+            backdrop-filter:blur(10px);
+        }
+
+        .hero-content h1{
+            font-size:72px;
+            line-height:1.1;
+            margin-bottom:25px;
+            font-weight:800;
+        }
+
+        .hero-content h1 span{
+            color:var(--primary);
+        }
+
+        .hero-content p{
+            color:var(--text);
+            font-size:18px;
+            line-height:1.8;
+            margin-bottom:40px;
+        }
+
+        .hero-btns{
+            display:flex;
+            gap:20px;
+            flex-wrap:wrap;
+        }
+
+        .btn{
+            padding:15px 34px;
+            border-radius:14px;
+            text-decoration:none;
+            font-weight:600;
+            transition:0.4s;
+            display:inline-flex;
+            align-items:center;
+            gap:10px;
+        }
+
+        .btn-primary{
+            background:linear-gradient(135deg,var(--primary),#2563eb);
+            color:#fff;
+            box-shadow:0 10px 30px rgba(0,180,255,0.3);
+        }
+
+        .btn-primary:hover{
+            transform:translateY(-5px);
+        }
+
+        .btn-secondary{
+            border:1px solid rgba(255,255,255,0.15);
+            color:#fff;
+            background:rgba(255,255,255,0.05);
+            backdrop-filter:blur(10px);
+        }
+
+        .btn-secondary:hover{
+            background:rgba(255,255,255,0.1);
+        }
+
+        /* Floating Cards */
+        .floating-card{
+            position:absolute;
+            background:rgba(255,255,255,0.08);
+            border:1px solid rgba(255,255,255,0.08);
+            padding:18px 22px;
+            border-radius:18px;
+            backdrop-filter:blur(12px);
+            box-shadow:0 10px 30px rgba(0,0,0,0.2);
+            animation:float 4s ease-in-out infinite;
+        }
+
+        .card1{
+            top:180px;
+            right:120px;
+        }
+
+        .card2{
+            bottom:150px;
+            right:220px;
+            animation-delay:1s;
+        }
+
+        @keyframes float{
+            0%,100%{
+                transform:translateY(0);
+            }
+            50%{
+                transform:translateY(-15px);
+            }
+        }
+
+        /* Section */
+        section{
+            padding:110px 7%;
+            position:relative;
+        }
+
+        .section-heading{
+            text-align:center;
+            margin-bottom:60px;
+        }
+
+        .section-heading h2{
+            font-size:48px;
+            margin-bottom:12px;
+        }
+
+        .section-heading p{
+            color:var(--text);
+            max-width:700px;
+            margin:auto;
+        }
+
+        /* About */
+        .about-grid{
+            display:grid;
+            grid-template-columns:1.2fr 1fr;
+            gap:40px;
+            align-items:center;
+        }
+
+        .glass-card{
+            background:rgba(255,255,255,0.05);
+            border:1px solid rgba(255,255,255,0.08);
+            border-radius:24px;
+            padding:40px;
+            backdrop-filter:blur(15px);
+            transition:0.4s;
+        }
+
+        .glass-card:hover{
+            transform:translateY(-8px);
+            box-shadow:0 20px 40px rgba(0,0,0,0.25);
+        }
+
+        .about-content p{
+            color:var(--text);
+            line-height:1.9;
+            margin-bottom:18px;
+        }
+
+        .stats{
+            display:grid;
+            grid-template-columns:repeat(2,1fr);
+            gap:20px;
+        }
+
+        .stat-box{
+            background:#0f1b2d;
+            padding:25px;
+            border-radius:18px;
+            text-align:center;
+            transition:0.3s;
+        }
+
+        .stat-box:hover{
+            transform:translateY(-6px);
+        }
+
+        .stat-box h3{
+            font-size:34px;
+            color:var(--primary);
+            margin-bottom:10px;
+        }
+
+        /* Trades */
+        .trade-table{
+            overflow-x:auto;
+            border-radius:24px;
+            background:rgba(255,255,255,0.05);
+            border:1px solid rgba(255,255,255,0.08);
+            backdrop-filter:blur(10px);
+        }
+
+        table{
+            width:100%;
+            border-collapse:collapse;
+        }
+
+        th{
+            background:rgba(0,180,255,0.15);
+            padding:22px;
+            text-align:left;
+            font-size:16px;
+        }
+
+        td{
+            padding:22px;
+            border-bottom:1px solid rgba(255,255,255,0.06);
+            color:var(--text);
+        }
+
+        tr{
+            transition:0.3s;
+        }
+
+        tr:hover{
+            background:rgba(255,255,255,0.04);
+        }
+
+        /* Contact */
+        .contact-wrapper{
+            display:grid;
+            grid-template-columns:1fr 1fr;
+            gap:35px;
+        }
+
+        .input-group{
+            margin-bottom:20px;
+        }
+
+        .input-group label{
+            display:block;
+            margin-bottom:10px;
+            font-size:14px;
+        }
+
+        .input-group input,
+        .input-group textarea{
+            width:100%;
+            background:#0f1b2d;
+            border:1px solid rgba(255,255,255,0.08);
+            padding:16px;
+            border-radius:14px;
+            color:#fff;
+            font-family:'Poppins',sans-serif;
+            outline:none;
+            transition:0.3s;
+        }
+
+        .input-group input:focus,
+        .input-group textarea:focus{
+            border-color:var(--primary);
+            box-shadow:0 0 0 4px rgba(0,180,255,0.1);
+        }
+
+        textarea{
+            resize:none;
+            height:140px;
+        }
+
+        .submit-btn{
+            width:100%;
+            border:none;
+            cursor:pointer;
+        }
+
+        .contact-info-box{
+            display:flex;
+            flex-direction:column;
+            gap:20px;
+        }
+
+        .info-item{
+            display:flex;
+            gap:18px;
+            align-items:flex-start;
+            background:#0f1b2d;
+            padding:22px;
+            border-radius:18px;
+            transition:0.3s;
+        }
+
+        .info-item:hover{
+            transform:translateX(6px);
+        }
+
+        .info-item i{
+            font-size:24px;
+            color:var(--primary);
+        }
+
+        .info-item p{
+            color:var(--text);
+        }
+
+        /* Map */
+        .map{
+            margin-top:35px;
+            overflow:hidden;
+            border-radius:24px;
+            border:1px solid rgba(255,255,255,0.08);
+        }
+
+        iframe{
+            width:100%;
+            height:420px;
+            border:none;
+        }
+
+        /* Footer */
+        footer{
+            padding:30px 7%;
+            text-align:center;
+            border-top:1px solid rgba(255,255,255,0.08);
+            color:var(--text);
+        }
+
+        /* Responsive */
+        @media(max-width:992px){
+
+            .hero-content h1{
+                font-size:54px;
+            }
+
+            .about-grid,
+            .contact-wrapper{
+                grid-template-columns:1fr;
+            }
+
+            .floating-card{
+                display:none;
+            }
+        }
+
+        @media(max-width:768px){
+
+            .navbar{
+                flex-direction:column;
+                gap:15px;
+            }
+
+            .nav-links{
+                flex-wrap:wrap;
+                justify-content:center;
+                gap:20px;
+            }
+
+            .hero-content h1{
+                font-size:42px;
+            }
+
+            .section-heading h2{
+                font-size:34px;
+            }
+
+            .stats{
+                grid-template-columns:1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+
+        <div class="logo">
+            Govt. <span>ITI</span>
+        </div>
+
+        <div class="nav-links">
+            <a href="#home">Home</a>
+            <a href="#about">About</a>
+            <a href="#trades">Trades</a>
+            <a href="#contact">Contact</a>
+            <a href="#location">Location</a>
+        </div>
+
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero" id="home">
+
+        <div class="hero-content">
+
+            <div class="hero-badge">
+                <i class="ri-graduation-cap-fill"></i>
+                Government Industrial Training Institute
+            </div>
+
+            <h1>
+                Govt. ITI <span>Chhattargarh</span> Bikaner
+            </h1>
+
+            <p>
+                Empowering students with practical skills, vocational education,
+                and industry-focused training through modern technical courses
+                and hands-on learning experiences.
+            </p>
+
+            <div class="hero-btns">
+                <a href="#trades" class="btn btn-primary">
+                    Explore Trades
+                    <i class="ri-arrow-right-line"></i>
+                </a>
+
+                <a href="#contact" class="btn btn-secondary">
+                    Contact Us
+                </a>
+            </div>
+
+        </div>
+
+        <!-- Floating Cards -->
+        <div class="floating-card card1">
+            <h3>100% Practical Training</h3>
+        </div>
+
+        <div class="floating-card card2">
+            <h3>Industry Focused Trades</h3>
+        </div>
+
+    </section>
+
+    <!-- About -->
+    <section id="about">
+
+        <div class="section-heading">
+            <h2>About Institute</h2>
+
+            <p>
+                A leading government technical institute dedicated to skill
+                development and vocational excellence in Rajasthan.
+            </p>
+        </div>
+
+        <div class="about-grid">
+
+            <div class="glass-card about-content">
+
+                <p>
+                    Govt. ITI Chhattargarh Bikaner is a Government Industrial
+                    Training Institute located in Bikaner, Rajasthan,
+                    providing high-quality vocational and technical education.
+                </p>
+
+                <p>
+                    The institute offers multiple technical and non-technical
+                    trades designed to help students build practical skills
+                    and become job-ready professionals.
+                </p>
+
+                <p>
+                    Through industry-focused learning, experienced trainers,
+                    and hands-on workshops, students gain real-world
+                    experience that prepares them for successful careers.
+                </p>
+
+            </div>
+
+            <div class="stats">
+
+                <div class="stat-box">
+                    <h3>7+</h3>
+                    <p>Trades Available</p>
+                </div>
+
+                <div class="stat-box">
+                    <h3>100%</h3>
+                    <p>Skill Based Training</p>
+                </div>
+
+                <div class="stat-box">
+                    <h3>Govt.</h3>
+                    <p>Recognized Institute</p>
+                </div>
+
+                <div class="stat-box">
+                    <h3>Career</h3>
+                    <p>Focused Learning</p>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- Trades -->
+    <section id="trades">
+
+        <div class="section-heading">
+            <h2>Available Trades</h2>
+
+            <p>
+                Explore our vocational and technical courses designed for
+                practical industry-ready training.
+            </p>
+        </div>
+
+        <div class="trade-table">
+
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>Trade Name</th>
+                        <th>Duration</th>
+                        <th>Eligibility</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    <tr>
+                        <td>Electrician</td>
+                        <td>2 Years</td>
+                        <td>10th Pass</td>
+                    </tr>
+
+                    <tr>
+                        <td>Fitter</td>
+                        <td>2 Years</td>
+                        <td>10th Pass</td>
+                    </tr>
+
+                    <tr>
+                        <td>COPA</td>
+                        <td>1 Year</td>
+                        <td>10th Pass</td>
+                    </tr>
+
+                    <tr>
+                        <td>Welder</td>
+                        <td>1 Year</td>
+                        <td>8th / 10th Pass</td>
+                    </tr>
+
+                    <tr>
+                        <td>Diesel Mechanic</td>
+                        <td>1 Year</td>
+                        <td>10th Pass</td>
+                    </tr>
+
+                    <tr>
+                        <td>Computer Operator</td>
+                        <td>1 Year</td>
+                        <td>10th Pass</td>
+                    </tr>
+
+                    <tr>
+                        <td>Plumber</td>
+                        <td>1 Year</td>
+                        <td>8th Pass</td>
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </section>
+
+    <!-- Contact -->
+    <section id="contact">
+
+        <div class="section-heading">
+            <h2>Contact Us</h2>
+
+            <p>
+                Have questions regarding admissions or trades?
+                Reach out to us anytime.
+            </p>
+        </div>
+
+        <div class="contact-wrapper">
+
+            <!-- Form -->
+            <div class="glass-card">
+
+                <form id="contactForm">
+
+                    <div class="input-group">
+                        <label>Full Name</label>
+                        <input type="text" placeholder="Enter your full name" required>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Email Address</label>
+                        <input type="email" placeholder="Enter your email" required>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Phone Number</label>
+                        <input type="tel" id="phone" placeholder="Enter your phone number" required>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Message</label>
+                        <textarea placeholder="Write your message..."></textarea>
+                    </div>
+
+                    <button class="btn btn-primary submit-btn">
+                        Submit Inquiry
+                    </button>
+
+                </form>
+
+            </div>
+
+            <!-- Info -->
+            <div class="contact-info-box">
+
+                <div class="info-item">
+                    <i class="ri-building-line"></i>
+
+                    <div>
+                        <h4>Institute Name</h4>
+                        <p>Govt. ITI Chhattargarh Bikaner</p>
+                    </div>
+                </div>
+
+                <div class="info-item">
+                    <i class="ri-map-pin-line"></i>
+
+                    <div>
+                        <h4>Location</h4>
+                        <p>Bikaner, Rajasthan</p>
+                    </div>
+                </div>
+
+                <div class="info-item">
+                    <i class="ri-phone-line"></i>
+
+                    <div>
+                        <h4>Principal Contact</h4>
+                        <p>9462361765</p>
+                    </div>
+                </div>
+
+                <div class="info-item">
+                    <i class="ri-mail-line"></i>
+
+                    <div>
+                        <h4>Email Address</h4>
+                        <p>iti.chattergarh@gmail.com</p>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- Location -->
+    <section id="location">
+
+        <div class="section-heading">
+            <h2>Location & Address</h2>
+
+            <p>
+                Visit our institute and explore the training environment.
+            </p>
+        </div>
+
+        <div class="glass-card">
+
+            <p><strong>Institute:</strong> Govt. ITI Chhattargarh Bikaner</p>
+            <br>
+
+            <p><strong>Location:</strong> Bikaner, Rajasthan</p>
+            <br>
+
+            <p><strong>Address:</strong> Chhattargarh, Bikaner, Rajasthan</p>
+
+            <div class="map">
+                <iframe
+                    src="https://maps.google.com/maps?q=Bikaner%20Rajasthan&t=&z=13&ie=UTF8&iwloc=&output=embed"
+                    allowfullscreen>
+                </iframe>
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        © 2026 Govt. ITI Chhattargarh Bikaner • All Rights Reserved
+    </footer>
+
+    <!-- Script -->
+    <script>
+
+        // Smooth Scroll
+        $('.nav-links a, .btn').on('click', function(e){
+
+            if(this.hash !== ''){
+
+                e.preventDefault();
+
+                $('html, body').animate({
+                    scrollTop: $(this.hash).offset().top - 80
+                }, 700);
+            }
+        });
+
+        // Form Validation
+        $('#contactForm').submit(function(e){
+
+            e.preventDefault();
+
+            let phone = $('#phone').val();
+
+            if(phone.length < 10){
+
+                alert('Please enter a valid phone number');
+                return;
+            }
+
+            alert('Your inquiry has been submitted successfully!');
+            this.reset();
+
+        });
+
+    </script>
+
+</body>
+</html>
